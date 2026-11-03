@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--batch-size', type=int, default=1)
     args = parser.parse_args()
     if not torch.cuda.is_available():
-        raise RuntimeError('CUDA unavailable. Install CUDA-enabled PyTorch in the system-wide Python environment.')
+        raise RuntimeError('CUDA unavailable. Install a CUDA-enabled PyTorch build.')
     if args.batch_size < 1:
         parser.error('Batch size must be positive.')
     torch.set_num_threads(2)

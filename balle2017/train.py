@@ -108,7 +108,7 @@ def main():
                  [('train', args.train_manifest), ('validation', args.val_manifest)]}
     run_info = {'arguments': vars(args), 'config': model.config, 'torch': str(torch.__version__),
                 'manifest_sha256': manifests, 'preprocessing': dataset.report(),
-                'reproduction_status': 'unvalidated historical reconstruction; see FIDELITY.md'}
+                'reproduction_status': 'Baseline reconstruction; original implementation parity unverified'}
     (root/'run.json').write_text(json.dumps(run_info, indent=2), encoding='utf-8')
     iterator = iter(loader)
     started = time.monotonic()

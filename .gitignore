@@ -5,5 +5,13 @@ data/
 runs/
 *.pt
 *.b17
-balle2017/references/*
-!balle2017/references/README.md
+balle2017/references/
+balle2017/results/
+balle2017/FIDELITY.md
+balle2017/FIRST_RUN.md
+balle2017/RESULTS.md
+balle2017/VALIDATION.md
+AGENTS.md
+AGENTS.local.md
+.agents/
+.codex/

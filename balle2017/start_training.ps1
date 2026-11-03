@@ -1,8 +1,8 @@
-# Run from any directory. Uses system-wide Python and a hidden background process.
+# Run from any directory. Starts training in a hidden background process.
 param([switch]$Resume)
 $ErrorActionPreference = 'Stop'
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
-$runRelative = 'runs/balle2017/imagenette-gray-lambda512-20261102'
+$runRelative = 'runs/balle2017/gray-lambda512'
 $runPath = Join-Path $repoRoot $runRelative
 New-Item -ItemType Directory -Force -Path $runPath | Out-Null
 $processFile = Join-Path $runPath 'process.json'
@@ -24,7 +24,7 @@ $arguments = @('-u', '-m', 'balle2017.train',
     '--output', $runRelative, '--mode', 'gray', '--lambda', '512',
     '--batch-size', '8', '--steps', '10000', '--validate-every', '250',
     '--saturation-fraction', '0.05', '--validation-crop', '256',
-    '--device', 'cuda', '--dataset-description', 'imagenette-v2-full-resolution-4726train-256validation')
+    '--device', 'cuda', '--dataset-description', 'imagenette-v2-full-resolution')
 if ($Resume) { $arguments += @('--resume', "$runRelative/last.pt") }
 $pythonPath = (Get-Command python).Source
 $suffix = if ($Resume) { '-resume-' + (Get-Date -Format 'yyyyMMdd-HHmmss') } else { '' }

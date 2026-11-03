@@ -160,7 +160,7 @@ def main():
         'classical_input': 'same crop/mode, rounded to 8-bit grayscale for JPEG/JPEG2000; error measured against original float luma',
         'matched_rate': 'per-image search for closest realizable classical file bytes; actual rate mismatch reported; no metric interpolation',
         'rate': 'actual_bpp includes full custom container; payload_bpp excludes header',
-        'warning': 'Reference arithmetic engine is not original CABAC; see FIDELITY.md'}, indent=2), encoding='utf-8')
+        'warning': 'Reference arithmetic engine is not original CABAC'}, indent=2), encoding='utf-8')
 
 
 if __name__ == '__main__':

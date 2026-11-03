@@ -1,0 +1,52 @@
+{
+  "averages": {
+    "balle2017-reference-not-CABAC": {
+      "actual_bpp": 0.5543487974719743,
+      "psnr": 29.59668205957657,
+      "luma_ms_ssim": 0.9464497417211533
+    },
+    "jpeg-matched": {
+      "actual_bpp": 0.5542942833447725,
+      "psnr": 31.550569359829694,
+      "luma_ms_ssim": 0.9783860494693121
+    },
+    "jpeg2000-matched": {
+      "actual_bpp": 0.5527902296385266,
+      "psnr": 34.04451279099602,
+      "luma_ms_ssim": 0.9783399924635887
+    }
+  },
+  "paired_comparisons": {
+    "jpeg-matched": {
+      "mean_psnr_difference_learned_minus_classical": -1.953887300253123,
+      "learned_psnr_wins": 1,
+      "learned_ms_ssim_wins": 0,
+      "mean_absolute_rate_mismatch_percent": 0.696029247500043,
+      "max_absolute_rate_mismatch_percent": 1.4207949604573944
+    },
+    "jpeg2000-matched": {
+      "mean_psnr_difference_learned_minus_classical": -4.44783073141945,
+      "learned_psnr_wins": 0,
+      "learned_ms_ssim_wins": 1,
+      "mean_absolute_rate_mismatch_percent": 0.40586820760741,
+      "max_absolute_rate_mismatch_percent": 1.3781888945165632
+    }
+  },
+  "display_selection": [
+    {
+      "image": "data\\kodak\\kodim23.png",
+      "learned_minus_jpeg2000_psnr": -7.7691266996403385
+    },
+    {
+      "image": "data\\kodak\\kodim02.png",
+      "learned_minus_jpeg2000_psnr": -4.085869141433399
+    },
+    {
+      "image": "data\\kodak\\kodim01.png",
+      "learned_minus_jpeg2000_psnr": -1.5739731293291683
+    }
+  ],
+  "mean_estimated_bpp": 0.5699579032758871,
+  "mean_payload_bpp": 0.5483924588194921,
+  "mean_header_bpp": 0.005956338652482275
+}

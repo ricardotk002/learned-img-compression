@@ -1,0 +1,39 @@
+{
+  "arguments": {
+    "checkpoints": [
+      "runs/balle2017/imagenette-gray-lambda512-20261102/best.pt"
+    ],
+    "test_manifest": "data/kodak.txt",
+    "output": "runs/balle2017/imagenette-gray-lambda512-20261102/kodak-best",
+    "crop_border": 8,
+    "skip_ms_ssim": false,
+    "jpeg_quality": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      70,
+      90
+    ],
+    "jpeg2000_rates": [
+      8.0,
+      10.0,
+      12.0,
+      16.0,
+      20.0,
+      30.0,
+      40.0
+    ],
+    "threads": 4,
+    "matched_classical": true
+  },
+  "metric_input": "raw floating reconstruction; PNGs are clipped/rounded previews",
+  "color": "full-range JPEG YCbCr, no offset needed for squared differences",
+  "ms_ssim": "pytorch-msssim, luma, data_range=1; historical numerical parity unverified",
+  "aggregation": "arithmetic mean of per-image metrics at fixed lambda/quality",
+  "classical_input": "same crop/mode, rounded to 8-bit grayscale for JPEG/JPEG2000; error measured against original float luma",
+  "matched_rate": "per-image search for closest realizable classical file bytes; actual rate mismatch reported; no metric interpolation",
+  "rate": "actual_bpp includes full custom container; payload_bpp excludes header",
+  "warning": "Reference arithmetic engine is not original CABAC; see FIDELITY.md"
+}

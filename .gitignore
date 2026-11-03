@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/
+runs/
+*.pt
+*.b17
+balle2017/references/*
+!balle2017/references/README.md

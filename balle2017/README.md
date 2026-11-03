@@ -5,18 +5,19 @@ Includes training, file compression/decompression, and evaluation.
 
 ## Install
 
-Use Python 3.12. Run commands from the repository root:
+Use Python 3.12. Run commands from the repository root in your terminal on
+Windows, Linux, or macOS. Use `python3` instead of `python` if required by
+your installation:
 
-```powershell
+```text
 python -m pip install -r requirements.txt
 ```
 
 For NVIDIA GPU training, install a CUDA-enabled PyTorch build using the
 [PyTorch installation instructions](https://pytorch.org/get-started/locally/).
-Verify GPU operation and run tests:
+Run tests:
 
-```powershell
-python -m balle2017.check_gpu
+```text
 python -m unittest discover -s balle2017/tests -v
 ```
 
@@ -24,7 +25,7 @@ python -m unittest discover -s balle2017/tests -v
 
 Download full-resolution Imagenette and Kodak and generate separate manifests:
 
-```powershell
+```text
 python -m balle2017.prepare_data --download --saturation-fraction 0.05
 ```
 
@@ -35,7 +36,7 @@ Training images must support 256x256 crops after downsampling below 0.75.
 
 ## Train
 
-```powershell
+```text
 python -m balle2017.train --train-manifest data/train.txt --val-manifest data/val.txt --output runs/balle2017/gray-lambda512 --mode gray --lambda 512 --batch-size 8 --steps 10000 --validate-every 250 --saturation-fraction 0.05 --device cuda
 ```
 
@@ -44,25 +45,18 @@ uses 192. Train a separate model for each lambda. Validation uses fixed 256x256
 center crops; `--validation-crop 0` evaluates full images.
 
 The output directory contains `status.json`, `run.json`, `metrics.jsonl`,
-`last.pt`, and `best.pt`. Resume by repeating the command with
-`--resume runs/balle2017/gray-lambda512/last.pt` and a larger `--steps` target.
+`last.pt`, and `best.pt`. Training progress is printed in the terminal;
+`status.json` records progress and `metrics.jsonl` records validation results.
 
-The Windows background launcher uses the same output directory:
+Resume from the latest checkpoint, targeting 20,000 total steps:
 
-```powershell
-./balle2017/start_training.ps1
-./balle2017/start_training.ps1 -Resume
-```
-
-View its live log:
-
-```powershell
-Get-Content runs/balle2017/gray-lambda512/stdout.log -Tail 10 -Wait
+```text
+python -m balle2017.train --train-manifest data/train.txt --val-manifest data/val.txt --output runs/balle2017/gray-lambda512 --mode gray --lambda 512 --batch-size 8 --steps 20000 --validate-every 250 --saturation-fraction 0.05 --device cuda --resume runs/balle2017/gray-lambda512/last.pt
 ```
 
 ## Compress and decompress
 
-```powershell
+```text
 python -m balle2017 compress --checkpoint runs/balle2017/gray-lambda512/best.pt --input data/example.png --output runs/example.b17
 python -m balle2017 decompress --checkpoint runs/balle2017/gray-lambda512/best.pt --input runs/example.b17 --output runs/reconstruction.png
 ```
@@ -73,7 +67,7 @@ implementation; `.b17` is a custom container format.
 
 ## Evaluate
 
-```powershell
+```text
 python -m balle2017.evaluate --checkpoints runs/balle2017/gray-lambda512/best.pt --test-manifest data/kodak.txt --output runs/balle2017/kodak --jpeg-quality 10 20 30 40 50 70 90 --jpeg2000-rates 8 10 12 16 20 30 40 --matched-classical
 ```
 
@@ -88,7 +82,7 @@ floating reconstructions; PNG previews are clipped and rounded.
 
 Generate plots and a report from evaluation outputs:
 
-```powershell
+```text
 python -m balle2017.summarize_results --evaluation runs/balle2017/kodak --training-run runs/balle2017/gray-lambda512
 ```
 
@@ -99,7 +93,7 @@ with `--matched-classical` enabled.
 
 For compatible MATLAB transform files in a local directory:
 
-```powershell
+```text
 python -m balle2017.import_weights --directory path/to/weights --lambda 512 --output runs/imported.pt
 python -m balle2017.verify_reference --directory path/to/weights
 ```

@@ -1,6 +1,6 @@
 # Ballé 2017: End-to-end Optimized Image Compression
 
-Pranjal's baseline for ECE-GY 6123. Paper: Ballé, Laparra, Simoncelli, ICLR 2017,
+Baseline implementation for ECE-GY 6123. Paper: Ballé, Laparra, Simoncelli, ICLR 2017,
 [arXiv:1611.01704](https://arxiv.org/abs/1611.01704).
 
 **Status: working initial reconstruction, not a completed historical reproduction.**

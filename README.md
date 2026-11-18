@@ -1,6 +1,6 @@
 # Learned Image Compression
 
-PyTorch implementations of Ballé 2017, ELIC-sm, and full ELIC for training, file compression, and evaluation, and an MLIC++ reproduction notebook.
+PyTorch implementations of Ballé 2017, the Ballé 2018 scale hyperprior, conditional variable-rate compression, ELIC-sm, and full ELIC, plus an MLIC++ reproduction notebook.
 
 ## Setup
 
@@ -8,7 +8,7 @@ PyTorch implementations of Ballé 2017, ELIC-sm, and full ELIC for training, fil
 python -m pip install -r requirements.txt
 ```
 
-Training and evaluation commands are available for [Ballé 2017](balle2017/README.md) and [ELIC](elic/README.md).
+Training and evaluation commands are available for [Ballé 2017](balle2017/README.md), [Ballé 2018](balle2018/README.md), [variable rate](variable_rate/README.md), and [ELIC](elic/README.md). The new hyperprior methods use Python 3.12 with PyTorch 2.6, torchvision 0.21, and CompressAI 1.2.8; exact pilot package versions and optional test/notebook dependencies are documented in their method directories. All generated data, checkpoints, logs, and results for these methods stay in their respective method-local, Git-ignored directories.
 
 ## Kodak results
 
@@ -43,6 +43,22 @@ All three checkpoints trailed their matched-size JPEG and JPEG2000 baselines on 
 | **MLIC++**, 40-epoch run | 0.0483 | 0.9234 | 27.21 | 0.9470 |
 
 The official weights reproduce the published PSNR BD-rate of −15.14% versus VTM. The 40-epoch run trailed the official λ = 0.0483 checkpoint by 10.1 dB at a higher rate.
+
+## Scale-hyperprior and variable-rate pilots
+
+These experiments use **full-image RGB** PSNR and MS-SSIM on all 24 Kodak images, without the edge crop used in the Ballé 2017/ELIC table. Bitrates include file headers and both entropy streams. Both models trained from scratch on the same 760/40 DIV2K split for approximately 90 minutes on an Apple M4 GPU.
+
+| Model / control | Actual bpp ↓ | RGB PSNR (dB) ↑ | RGB MS-SSIM ↑ |
+| --- | ---: | ---: | ---: |
+| **Ballé 2018 scale hyperprior**, λ=0.0067 | 0.41388 | 28.874 | 0.95314 |
+| **Variable rate**, quality 0, Δ=1 | 0.23584 | 26.739 | 0.92576 |
+| Variable rate, quality 1, Δ=1 | 0.30250 | 27.572 | 0.93958 |
+| Variable rate, quality 2, Δ=1 | 0.35861 | 27.933 | 0.94711 |
+| Variable rate, quality 3, Δ=1 | 0.39694 | 28.172 | 0.95074 |
+
+One variable-rate checkpoint supports 20 tested quality/quantization settings spanning 0.11852–0.66696 bpp. All 480 saved files independently matched deterministic inference, with no observed rate reversals across the tested controls. The fixed-rate pilot remains more PSNR-efficient near 0.4 bpp. Equal wall-clock time shared across four objectives is not equal training per operating point, and these short pilots are not converged paper reproductions. Only one fixed-rate hyperprior point exists, so a baseline-family BD-rate is not available.
+
+The [baseline notebook](balle2018/notebooks/baseline_analysis.ipynb) and [variable-rate notebook](variable_rate/notebooks/variable_rate_analysis.ipynb) read local artifacts. Trained weights, datasets, generated images, and full evaluation outputs are not stored in Git.
 
 ## Published comparisons
 

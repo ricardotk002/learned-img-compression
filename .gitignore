@@ -15,3 +15,11 @@ AGENTS.md
 AGENTS.local.md
 .agents/
 .codex/
+balle2018/results/
+variable_rate/results/
+.cache/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.lic
+.DS_Store
